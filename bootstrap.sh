@@ -198,7 +198,7 @@ install_ubuntu_14.04_deps() {
     apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Upgrading all packages to latest version ..."
-    __apt_get_upgrade_noinput >> $HOME/ECC-install.log 2>&1 || return 1
+    #__apt_get_upgrade_noinput >> $HOME/ECC-install.log 2>&1 || return 1
 
     return 0
 }
