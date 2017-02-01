@@ -492,7 +492,7 @@ install_ECC_files() {
   # Checkout code from ECC-files and put these files into place
   echoinfo "ECC VM: Installing ECC Files"
 	CDIR=$(pwd)
-	#git clone --recursive https://github.com/sans-dfir/ECC-files /tmp/ECC-files >> $HOME/ECC-install.log 2>&1
+	git clone --recursive https://github.com/LalithaKurma/ECCTest/tree/master/ECC-files /tmp/ECC-files >> $HOME/ECC-install.log 2>&1
 	cd /tmp/ECC-files
 	bash install.sh >> $HOME/ECC-install.log 2>&1
 	cd $CDIR
