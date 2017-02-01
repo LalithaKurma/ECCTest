@@ -213,8 +213,7 @@ ubuntu-tweak
 unity-control-center
 wireshark
 zenity
-Zenmap
-"
+Zenmap"
 
     if [ "$@" = "dev" ]; then
         packages="$packages"
@@ -286,7 +285,8 @@ install_ECC_Tools() {
 	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
 	cd /tmp/ECCTools
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
-        gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb	
+        #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb	
+        dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
         cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
