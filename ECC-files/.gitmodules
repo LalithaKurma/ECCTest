@@ -1,0 +1,15 @@
+[submodule "PE_Carver"]
+	path = pe_carver
+	url = https://github.com/Rurik/PE_Carver.git
+[submodule "page_brute"]
+	path = page_brute
+	url = https://github.com/matonis/page_brute.git
+[submodule "Java_IDX_Parser"]
+	path = java_idx_parser
+	url = https://github.com/Rurik/Java_IDX_Parser.git
+[submodule "shellbags"]
+	path = shellbags
+	url = https://github.com/williballenthin/shellbags.git
+[submodule "4n6-scripts"]
+	path = 4n6-scripts
+	url = https://github.com/cheeky4n6monkey/4n6-scripts
