@@ -204,39 +204,14 @@ install_ubuntu_14.04_deps() {
 }
 
 install_ubuntu_14.04_packages() {
-    packages="
-build-essential
-g++
-gcc
-git
-git-core
-nmap
+    packages="nmap
+gdebi
 openjdk-6-jdk
 postgresql
-qemu
-qemu-utils
-radare
-radare-gtk
-radare2
-rar
-readpst
-regripper
-rsakeyfind
-safecopy
-samba
 snort
-stunnel4
-system-config-samba
 ubuntu-tweak
 unity-control-center
-unrar
-vbindiff
-vim
-virtuoso-minimal
-vmfs-tools
-vncviewer
 wireshark
-xpdf
 zenity
 Zenmap
 "
@@ -304,14 +279,15 @@ install_perl_modules() {
 	perl -MCPAN -e "install Net::Wigle" >> $HOME/ECC-install.log 2>&1
 }
 
-install_burp_suite() {
+install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
-  echoinfo "ECC tools: Installing Burp Suite"
+  echoinfo "ECC tools: Installing ECC Tools"
 	CDIR=$(pwd)
 	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
 	cd /tmp/ECCTools
-	bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
-	cd $CDIR
+	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
+        gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb	
+        cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
 install_ECC_files() {
@@ -675,8 +651,8 @@ if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     install_ubuntu_${VER}_deps $ITYPE
     install_ubuntu_${VER}_packages $ITYPE
     install_ubuntu_${VER}_pip_packages $ITYPE
-    #Calling to install burpsuite package    
-    install_burp_suite
+    #Calling to install ECC Tools    
+    install_ECC_Tools
     configure_cpan
     install_perl_modules
     install_ECC_files
