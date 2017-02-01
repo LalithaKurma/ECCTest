@@ -304,6 +304,16 @@ install_perl_modules() {
 	perl -MCPAN -e "install Net::Wigle" >> $HOME/ECC-install.log 2>&1
 }
 
+install_burp_suite() {
+  # Installing Burp suite from ECCTools Github Repository
+  echoinfo "ECC tools: Installing Burp Suite"
+	CDIR=$(pwd)
+	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
+	cd /tmp/ECCTools
+	bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
+	cd $CDIR
+	rm -r -f /tmp/ECCTools
+}
 install_ECC_files() {
   # Checkout code from ECC-files and put these files into place
   echoinfo "ECC VM: Installing ECC Files"
@@ -665,6 +675,8 @@ if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     install_ubuntu_${VER}_deps $ITYPE
     install_ubuntu_${VER}_packages $ITYPE
     install_ubuntu_${VER}_pip_packages $ITYPE
+    #Calling to install burpsuite package    
+    install_burp_suite
     configure_cpan
     install_perl_modules
     install_ECC_files
