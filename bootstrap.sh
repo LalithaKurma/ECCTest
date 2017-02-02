@@ -494,7 +494,7 @@ configure_ubuntu_14.04_ECC_vm() {
   # Works in 14.04 too
 	if [ ! -e /usr/share/unity-greeter/logo.png.ubuntu ]; then
 		sudo cp /usr/share/unity-greeter/logo.png /usr/share/unity-greeter/logo.png.ubuntu
-		sudo cp /usr/share/ECC/images/login_logo.png /usr/share/unity-greeter/logo.png
+		#sudo cp /usr/share/ECC/images/login_logo.png /usr/share/unity-greeter/logo.png
 	fi
 
   # Setup user favorites (only for 12.04)
