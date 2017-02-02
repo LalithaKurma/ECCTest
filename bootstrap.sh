@@ -189,7 +189,7 @@ install_ubuntu_14.04_deps() {
     add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Adding ECC Repository: $@"
-    #add-apt-repository -y ppa:ECC/$@  >> $HOME/ECC-install.log 2>&1 || return 1
+    add-apt-repository -y ppa:ECC/$@  >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Adding GIFT Repository: Stable"
     add-apt-repository -y ppa:gift/stable >> $HOME/ECC-install.log 2>&1 || return 1
@@ -198,7 +198,7 @@ install_ubuntu_14.04_deps() {
     apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Upgrading all packages to latest version ..."
-    #__apt_get_upgrade_noinput >> $HOME/ECC-install.log 2>&1 || return 1
+    __apt_get_upgrade_noinput >> $HOME/ECC-install.log 2>&1 || return 1
 
     return 0
 }
@@ -206,8 +206,6 @@ install_ubuntu_14.04_deps() {
 install_ubuntu_14.04_packages() {
     packages="nmap
 gdebi
-openjdk-6-jdk
-postgresql
 snort
 ubuntu-tweak
 unity-control-center
