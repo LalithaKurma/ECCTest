@@ -322,7 +322,7 @@ nfdump
 ngrep
 nikto
 nmap
-ocular
+okular
 open-iscsi
 openjdk-6-jdk
 ophcrack
@@ -361,7 +361,7 @@ rar
 readpst
 regripper
 rsakeyfind
-safecopyXdot
+safecopy
 xfsprogs
 xmount
 samba
@@ -844,11 +844,11 @@ if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     install_ubuntu_${VER}_deps $ITYPE
     install_ubuntu_${VER}_packages $ITYPE
     install_ubuntu_${VER}_pip_packages $ITYPE
-    #Calling to install ECC-Tools    
-    install_ECC_Tools
     configure_cpan
     install_perl_modules
     install_ECC_files
+    #Calling to install ECC-Tools    
+    install_ECC_Tools
 fi
 
 # Configure for ECC
