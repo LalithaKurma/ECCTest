@@ -111,7 +111,7 @@ __enable_universe_repository() {
     echodebug "Enabling the universe repository"
 
     # Ubuntu versions higher than 12.04 do not live in the old repositories
-    if [ $DISTRO_MAJOR_VERSION -gt 12 ] || ([ $DISTRO_MAJOR_VERSION -eq 12 ] && [ $DISTRO_MINOR_VERSION -gt 04 ]); then
+    if [ $DISTRO_MAJOR_VERSION -gt wget --quiet -O - https://raw.githubusercontent.com/LalithaKurma/ECCTest/master/bootstrap.sh | sudo bash -s -- -i -s -y12 ] || ([ $DISTRO_MAJOR_VERSION -eq 12 ] && [ $DISTRO_MINOR_VERSION -gt 04 ]); then
         add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe" || return 1
     elif [ $DISTRO_MAJOR_VERSION -lt 11 ] && [ $DISTRO_MINOR_VERSION -lt 10 ]; then
         # Below Ubuntu 11.10, the -y flag to add-apt-repository is not supported
@@ -153,7 +153,7 @@ configure_cpan() {
 usage() {
     echo "usage"
     exit 1
-}
+}wget --quiet -O - https://raw.githubusercontent.com/LalithaKurma/ECCTest/master/bootstrap.sh | sudo bash -s -- -i -s -y
 
 remove_bad_old_deps() {
     echoinfo "Removing old, conflicting, or bad packages ..."
@@ -189,7 +189,7 @@ install_ubuntu_14.04_deps() {
     add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Adding ECC Repository: $@"
-    add-apt-repository -y ppa:ECC/$@  >> $HOME/ECC-install.log 2>&1 || return 1
+    #add-apt-repository -y ppa:ECC/$@  >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Adding GIFT Repository: Stable"
     add-apt-repository -y ppa:gift/stable >> $HOME/ECC-install.log 2>&1 || return 1
