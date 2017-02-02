@@ -848,7 +848,7 @@ if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     install_perl_modules
     install_ECC_files
     #Calling to install ECC-Tools    
-    install_ECC_Tools
+    #install_ECC_Tools
 fi
 
 # Configure for ECC
@@ -860,6 +860,8 @@ if [ "$SKIN" -eq 1 ]; then
     configure_ubuntu_${VER}_ECC_vm
 fi
 
+#Calling to install ECC-Tools    
+install_ECC_Tools
 complete_message
 
 if [ "$SKIN" -eq 1 ]; then
