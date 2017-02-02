@@ -211,8 +211,6 @@ gcc
 git
 git-core
 nmap
-openjdk-6-jdk
-postgresql
 qemu
 qemu-utils
 radare
