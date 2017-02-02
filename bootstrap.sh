@@ -205,11 +205,38 @@ install_ubuntu_14.04_deps() {
 
 install_ubuntu_14.04_packages() {
     packages="nmap
-gdebi
+build-essential
+g++
+gcc
+git
+git-core
+nmap
+openjdk-6-jdk
+postgresql
+qemu
+qemu-utils
+radare
+radare-gtk
+radare2
+rar
+readpst
+regripper
+rsakeyfind
+safecopy
+samba
 snort
+stunnel4
+system-config-samba
 ubuntu-tweak
 unity-control-center
+unrar
+vbindiff
+vim
+virtuoso-minimal
+vmfs-tools
+vncviewer
 wireshark
+xpdf
 zenity
 Zenmap"
 
@@ -494,7 +521,7 @@ configure_ubuntu_14.04_ECC_vm() {
   # Works in 14.04 too
 	if [ ! -e /usr/share/unity-greeter/logo.png.ubuntu ]; then
 		sudo cp /usr/share/unity-greeter/logo.png /usr/share/unity-greeter/logo.png.ubuntu
-		#sudo cp /usr/share/ECC/images/login_logo.png /usr/share/unity-greeter/logo.png
+		sudo cp /usr/share/ECC/images/login_logo.png /usr/share/unity-greeter/logo.png
 	fi
 
   # Setup user favorites (only for 12.04)
