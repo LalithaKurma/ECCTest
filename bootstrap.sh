@@ -189,7 +189,7 @@ install_ubuntu_14.04_deps() {
     add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Adding ECC Repository: $@"
-    #add-apt-repository -y ppa:ECC/$@  >> $HOME/ECC-install.log 2>&1 || return 1
+    add-apt-repository -y ppa:sift/$@  >> $HOME/ECC-install.log 2>&1 || return 1
 
     echoinfo "Adding GIFT Repository: Stable"
     add-apt-repository -y ppa:gift/stable >> $HOME/ECC-install.log 2>&1 || return 1
