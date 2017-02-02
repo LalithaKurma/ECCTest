@@ -111,7 +111,7 @@ __enable_universe_repository() {
     echodebug "Enabling the universe repository"
 
     # Ubuntu versions higher than 12.04 do not live in the old repositories
-    if [ $DISTRO_MAJOR_VERSION -gt wget --quiet -O - https://raw.githubusercontent.com/LalithaKurma/ECCTest/master/bootstrap.sh | sudo bash -s -- -i -s -y12 ] || ([ $DISTRO_MAJOR_VERSION -eq 12 ] && [ $DISTRO_MINOR_VERSION -gt 04 ]); then
+    if [ $DISTRO_MAJOR_VERSION -gt 12 ] || ([ $DISTRO_MAJOR_VERSION -eq 12 ] && [ $DISTRO_MINOR_VERSION -gt 04 ]); then
         add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe" || return 1
     elif [ $DISTRO_MAJOR_VERSION -lt 11 ] && [ $DISTRO_MINOR_VERSION -lt 10 ]; then
         # Below Ubuntu 11.10, the -y flag to add-apt-repository is not supported
@@ -153,7 +153,7 @@ configure_cpan() {
 usage() {
     echo "usage"
     exit 1
-}wget --quiet -O - https://raw.githubusercontent.com/LalithaKurma/ECCTest/master/bootstrap.sh | sudo bash -s -- -i -s -y
+}
 
 remove_bad_old_deps() {
     echoinfo "Removing old, conflicting, or bad packages ..."
@@ -204,13 +204,15 @@ install_ubuntu_14.04_deps() {
 }
 
 install_ubuntu_14.04_packages() {
-    packages="nmap
+    packages="
 build-essential
 g++
 gcc
 git
 git-core
 nmap
+openjdk-6-jdk
+postgresql
 qemu
 qemu-utils
 radare
@@ -236,7 +238,8 @@ vncviewer
 wireshark
 xpdf
 zenity
-Zenmap"
+Zenmap
+"
 
     if [ "$@" = "dev" ]; then
         packages="$packages"
@@ -310,9 +313,11 @@ install_ECC_Tools() {
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
         #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb	
         dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
+        echoinfo "ECC tools: Installed NetDiscover Tool"
         cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
+
 install_ECC_files() {
   # Checkout code from ECC-files and put these files into place
   echoinfo "ECC VM: Installing ECC Files"
@@ -674,7 +679,7 @@ if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     install_ubuntu_${VER}_deps $ITYPE
     install_ubuntu_${VER}_packages $ITYPE
     install_ubuntu_${VER}_pip_packages $ITYPE
-    #Calling to install ECC Tools    
+    #Calling to install ECC-Tools    
     install_ECC_Tools
     configure_cpan
     install_perl_modules
@@ -695,3 +700,5 @@ complete_message
 if [ "$SKIN" -eq 1 ]; then
     complete_message_skin
 fi
+
+
