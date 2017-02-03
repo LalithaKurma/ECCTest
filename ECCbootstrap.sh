@@ -2,17 +2,28 @@ __apt_get_install_noinput() {
     apt-get install -y -o DPkg::Options::=--force-confold $@; return $?
 }
 install_recon_ng(){
-   PACKAGE="python-pip"
+   packages="python-pip
+git
+python-pip
+python-dnspython
+python-mechanize
+python-slowaes
+python-xlsxwriter
+python-jsonrpclib
+python-lxml"
    CDDR=$(pwd)
    cd /tmp/ECCTools/reconng
-   __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
+   packages="$packages"
+   for PACKAGE in $packages; do
+        __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
         ERROR=$?
         if [ $ERROR -ne 0 ]; then
-            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
+            echoerror "Install Failure: $PACKAGE (Error Code: $ERROR)"
         else
-            echo "Installed Package: $PACKAGE"
+            echoinfo "Installed Package: $PACKAGE"
         fi
-    pip install -r REQUIREMENTS 
+    done
+    #pip install -r REQUIREMENTS 
     cd $CDDR
 }
 install_ECC_Tools() {
