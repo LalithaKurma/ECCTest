@@ -1,3 +1,21 @@
+__apt_get_install_noinput() {
+    apt-get install -y -o DPkg::Options::=--force-confold $@; return $?
+}
+install_recon_ng(){
+   packages="python-pip"
+   CDDR=$(pwd)
+   cd /tmp/ECCTools/reconng
+   __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
+        ERROR=$?
+        if [ $ERROR -ne 0 ]; then
+            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
+        else
+            echo "Installed Package: $PACKAGE"
+        fi
+    done
+    pip install -r REQUIREMENTS 
+    cd $CDDR
+}
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
   echo "ECC tools: Installing ECC Tools"
@@ -12,6 +30,9 @@ install_ECC_Tools() {
 	echo "* Info: Installing Nmap Tool..."        
 	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
         echo "ECC tools: Completed Nmap Tool Installation"
+	echo "* Info: Installing recon-ng Tool..."
+	install_recon_ng
+	echo "ECC tools: Completed recon-ng Installation"
         cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
