@@ -8,7 +8,7 @@ install_recon_ng(){
    __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
         ERROR=$?
         if [ $ERROR -ne 0 ]; then
-            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
+            echo "Install Failure: $package (Error Code: $ERROR)"
         else
             echo "Installed Package: $PACKAGE"
         fi
