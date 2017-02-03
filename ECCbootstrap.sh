@@ -14,13 +14,14 @@ python-lxml"
    CDDR=$(pwd)
    cd /tmp/ECCTools/reconng
    packages="$packages"
+   echo "Installing Python packages"
    for PACKAGE in $packages; do
         __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
         ERROR=$?
         if [ $ERROR -ne 0 ]; then
-            echoerror "Install Failure: $PACKAGE (Error Code: $ERROR)"
+            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
         else
-            echoinfo "Installed Package: $PACKAGE"
+            echo "Installed Package: $PACKAGE"
         fi
     done
     #pip install -r REQUIREMENTS 
