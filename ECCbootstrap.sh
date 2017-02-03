@@ -2,13 +2,13 @@ __apt_get_install_noinput() {
     apt-get install -y -o DPkg::Options::=--force-confold $@; return $?
 }
 install_recon_ng(){
-   packages="python-pip"
+   PACKAGE="python-pip"
    CDDR=$(pwd)
    cd /tmp/ECCTools/reconng
    __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
         ERROR=$?
         if [ $ERROR -ne 0 ]; then
-            echo "Install Failure: $package (Error Code: $ERROR)"
+            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
         else
             echo "Installed Package: $PACKAGE"
         fi
