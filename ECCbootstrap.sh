@@ -12,7 +12,6 @@ install_recon_ng(){
         else
             echo "Installed Package: $PACKAGE"
         fi
-    done
     pip install -r REQUIREMENTS 
     cd $CDDR
 }
