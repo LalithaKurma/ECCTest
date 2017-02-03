@@ -6,9 +6,12 @@ install_ECC_Tools() {
 	cd /tmp/ECCTools
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
         #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb	
-        dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
+	echo "* Info: Installing NetDiscover Tool..."        
+	dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
+	echo "ECC tools: Completed NetDiscover Tool Installation"
+	echo "* Info: Installing Nmap Tool..."        
 	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
-        echo "ECC tools: Installed NetDiscover Tool"
+        echo "ECC tools: Completed Nmap Tool Installation"
         cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
