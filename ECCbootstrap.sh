@@ -25,6 +25,7 @@ python-lxml"
         fi
     done
     #pip install -r REQUIREMENTS 
+    cp -r /tmp/ECCTools/reconng /home/cast/
     cd $CDDR
 }
 install_ECC_Tools() {
