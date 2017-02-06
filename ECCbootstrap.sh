@@ -37,11 +37,14 @@ install_ECC_Tools() {
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
         #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb	
 	echo "* Info: Installing NetDiscover Tool..."        
-	dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
+	dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f >> $HOME/ECC-install.log 2>&1
 	echo "ECC tools: Completed NetDiscover Tool Installation"
 	echo "* Info: Installing Nmap Tool..."        
-	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
+	dpkg -i nmap_7.40-2_amd64.deb && apt install -f >> $HOME/ECC-install.log 2>&1
         echo "ECC tools: Completed Nmap Tool Installation"
+	echo "* Info: Installing Zenmap Tool..."        
+	dpkg -i zenmap_7.40-2_all.deb && apt install -f >> $HOME/ECC-install.log 2>&1
+        echo "ECC tools: Completed Zenmap Tool Installation"
 	echo "* Info: Installing recon-ng Tool..."
 	install_recon_ng
 	echo "ECC tools: Completed recon-ng Installation"
@@ -53,7 +56,6 @@ complete_message() {
     echo
     echo "Installation Complete!"
 }
-
 
 #Calling to install ECC-Tools    
 echo "ECC: Welcome"
