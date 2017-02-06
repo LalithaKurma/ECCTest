@@ -40,10 +40,18 @@ perl"
 #        fi
 #}
 install_perl_modules(){
+	perl -MCPAN -e "install Getopt::Long"
+	perl -MCPAN -e "install IO::File"	
 	perl -MCPAN -e "install Net::Wigle"
+	perl -MCPAN -e "install Thread::Queue"
+	perl -MCPAN -e "install Net::IP"
+	perl -MCPAN -e "install Net::DNS"
 	perl -MCPAN -e "install Net::Netmask"
+	perl -MCPAN -e "install Net::Whois::IP"
+	perl -MCPAN -e "install HTML::Parser"
 	perl -MCPAN -e "install XML::Writer"
 	perl -MCPAN -e "install String::Random"
+	perl -MCPAN -e "install WWW::Mechanize"
 }
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
@@ -53,23 +61,23 @@ install_ECC_Tools() {
 	cd /tmp/ECCTools
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
         #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb
-	
+	printf "\n"
 	echo "* Info: Installing NetDiscover Tool..."        
 	dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
 	echo "ECC tools: Completed NetDiscover Tool Installation"
-	
+	printf "\n"
 	echo "* Info: Installing Nmap Tool..."        
 	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
         echo "ECC tools: Completed Nmap Tool Installation"
-
+	printf "\n"
 	echo "* Info: Installing Zenmap Tool..."        
 	dpkg -i zenmap_7.40-2_all.deb && apt install -f
         echo "ECC tools: Completed Zenmap Tool Installation"
-
+	printf "\n"
 	echo "* Info: Installing recon-ng Tool..."
 	install_recon_ng
 	echo "ECC tools: Completed recon-ng Installation"
-
+	printf "\n"
 	#echo "* Info: Installing Snmpcheck Tool..."        
 	#dpkg -i snmpcheck_1.8-5_all.deb && apt install -f
         #echo "ECC tools: Completed Snmpcheck Installation"
@@ -81,7 +89,7 @@ install_ECC_Tools() {
 	echo "ECC tools: Installing Perl Modules"
 	install_perl_modules
 	echo "ECC tools: Installed Perl Modules"
-
+	printf "\n"
 	echo "* Info: Installing dnsenum Tool..."        
 	dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
         echo "ECC tools: Completed dnsenum Installation"
