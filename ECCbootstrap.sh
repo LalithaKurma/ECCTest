@@ -2,7 +2,8 @@ __apt_get_install_noinput() {
     apt-get install -y -o DPkg::Options::=--force-confold $@; return $?
 }
 install_recon_ng(){
-   packages="python-pip
+   packages="alien
+python-pip
 git
 python-pip
 python-dnspython
@@ -10,7 +11,8 @@ python-mechanize
 python-slowaes
 python-xlsxwriter
 python-jsonrpclib
-python-lxml"
+python-lxml
+perl"
    CDDR=$(pwd)
    cd /tmp/ECCTools/reconng
    packages="$packages"
@@ -28,15 +30,15 @@ python-lxml"
     cp -r /tmp/ECCTools/reconng /home/cast/
     cd $CDDR
 }
-install_perl(){
-	 __apt_get_install_noinput "perl" >> $HOME/ECC-install.log 2>&1
-        ERROR=$?
-        if [ $ERROR -ne 0 ]; then
-            echo "Install Failure: perl (Error Code: $ERROR)"
-        else
-            echo "Installed Package: perl"
-        fi
-}
+#install_perl(){
+#	 __apt_get_install_noinput "perl" >> $HOME/ECC-install.log 2>&1
+#        ERROR=$?
+#        if [ $ERROR -ne 0 ]; then
+#            echo "Install Failure: perl (Error Code: $ERROR)"
+#        else
+#            echo "Installed Package: perl"
+#        fi
+#}
 install_perl_modules(){
 	perl -MCPAN -e "install Net::Wigle"
 	perl -MCPAN -e "install Net::Netmask"
@@ -45,7 +47,7 @@ install_perl_modules(){
 }
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
-  echo "ECC tools: Installing ECC Tools"
+  echo "ECC tools: Copying ECC Tools"
 	CDIR=$(pwd)
 	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
 	cd /tmp/ECCTools
@@ -68,13 +70,13 @@ install_ECC_Tools() {
 	install_recon_ng
 	echo "ECC tools: Completed recon-ng Installation"
 
-	echo "* Info: Installing Snmpcheck Tool..."        
-	dpkg -i snmpcheck_1.8-5_all.deb && apt install -f
-        echo "ECC tools: Completed Snmpcheck Installation"
+	#echo "* Info: Installing Snmpcheck Tool..."        
+	#dpkg -i snmpcheck_1.8-5_all.deb && apt install -f
+        #echo "ECC tools: Completed Snmpcheck Installation"
 
-	echo "ECC tools: Installing Perl..."
-	install_perl
-	echo "ECC tools: Installed Perl"
+	#echo "ECC tools: Installing Perl..."
+	#install_perl
+	#echo "ECC tools: Installed Perl"
 
 	echo "ECC tools: Installing Perl Modules"
 	install_perl_modules
@@ -94,7 +96,7 @@ complete_message() {
 }
 
 #Calling to install ECC-Tools    
-echo "ECC: Welcome"
+echo "ECC: Welcome CEH"
 install_ECC_Tools
 complete_message
 
