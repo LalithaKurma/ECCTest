@@ -112,14 +112,14 @@ install_ECC_Tools() {
         #echo "ECC tools: Completed Snmpcheck Installation"
 
 		
-	install_dnsenum_dependencies
-	echo "ECC tools: Installing Perl Modules"
-	install_perl_modules
-	echo "ECC tools: Installed Perl Modules"
-	printf "\n"
-	echo "* Info: Installing dnsenum Tool..."        
-	dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
-        echo "ECC tools: Completed dnsenum Installation"
+	#install_dnsenum_dependencies
+	#echo "ECC tools: Installing Perl Modules"
+	#install_perl_modules
+	#echo "ECC tools: Installed Perl Modules"
+	#printf "\n"
+	#echo "* Info: Installing dnsenum Tool..."        
+	#dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
+        #echo "ECC tools: Completed dnsenum Installation"
 	printf "\n"
 	echo "* Info: Installing dnsdict6 Tool..."
 	install_dnsdict6_dependencies
