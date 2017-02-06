@@ -28,6 +28,15 @@ python-lxml"
     cp -r /tmp/ECCTools/reconng /home/cast/
     cd $CDDR
 }
+install_perl(){
+	 __apt_get_install_noinput "perl" >> $HOME/ECC-install.log 2>&1
+        ERROR=$?
+        if [ $ERROR -ne 0 ]; then
+            echo "Install Failure: perl (Error Code: $ERROR)"
+        else
+            echo "Installed Package: perl"
+        fi
+}
 install_perl_modules(){
 	perl -MCPAN -e "install Net::Wigle"
 	perl -MCPAN -e "install Net::Netmask"
@@ -41,28 +50,40 @@ install_ECC_Tools() {
 	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
 	cd /tmp/ECCTools
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
-        #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb	
+        #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb
+	
 	echo "* Info: Installing NetDiscover Tool..."        
-	dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f >> $HOME/ECC-install.log 2>&1 || return 1
+	dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
 	echo "ECC tools: Completed NetDiscover Tool Installation"
+	
 	echo "* Info: Installing Nmap Tool..."        
 	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
         echo "ECC tools: Completed Nmap Tool Installation"
+
 	echo "* Info: Installing Zenmap Tool..."        
 	dpkg -i zenmap_7.40-2_all.deb && apt install -f
         echo "ECC tools: Completed Zenmap Tool Installation"
+
 	echo "* Info: Installing recon-ng Tool..."
 	install_recon_ng
 	echo "ECC tools: Completed recon-ng Installation"
+
 	echo "* Info: Installing Snmpcheck Tool..."        
 	dpkg -i snmpcheck_1.8-5_all.deb && apt install -f
         echo "ECC tools: Completed Snmpcheck Installation"
+
+	echo "ECC tools: Installing Perl..."
+	install_perl
+	echo "ECC tools: Installed Perl"
+
 	echo "ECC tools: Installing Perl Modules"
 	install_perl_modules
 	echo "ECC tools: Installed Perl Modules"
+
 	echo "* Info: Installing dnsenum Tool..."        
 	dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
         echo "ECC tools: Completed dnsenum Installation"
+
         cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
