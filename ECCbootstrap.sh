@@ -28,6 +28,12 @@ python-lxml"
     cp -r /tmp/ECCTools/reconng /home/cast/
     cd $CDDR
 }
+install_perl_modules(){
+	perl -MCPAN -e "install Net::Wigle"
+	perl -MCPAN -e "install Net::Netmask"
+	perl -MCPAN -e "install XML::Writer"
+	perl -MCPAN -e "install String::Random"
+}
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
   echo "ECC tools: Installing ECC Tools"
@@ -40,16 +46,22 @@ install_ECC_Tools() {
 	dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f >> $HOME/ECC-install.log 2>&1 || return 1
 	echo "ECC tools: Completed NetDiscover Tool Installation"
 	echo "* Info: Installing Nmap Tool..."        
-	dpkg -i nmap_7.40-2_amd64.deb && apt install -f >> $HOME/ECC-install.log 2>&1 || return 1
+	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
         echo "ECC tools: Completed Nmap Tool Installation"
 	echo "* Info: Installing Zenmap Tool..."        
-	dpkg -i zenmap_7.40-2_all.deb && apt install -f >> $HOME/ECC-install.log 2>&1 || return 1
+	dpkg -i zenmap_7.40-2_all.deb && apt install -f
         echo "ECC tools: Completed Zenmap Tool Installation"
 	echo "* Info: Installing recon-ng Tool..."
 	install_recon_ng
 	echo "ECC tools: Completed recon-ng Installation"
 	echo "* Info: Installing Snmpcheck Tool..."        
-	dpkg -i snmpcheck_1.8-5_all.deb && apt install -f >> $HOME/ECC-install.log 2>&1 || return 1
+	dpkg -i snmpcheck_1.8-5_all.deb && apt install -f
+        echo "ECC tools: Completed Snmpcheck Installation"
+	echo "ECC tools: Installing Perl Modules"
+	install_perl_modules
+	echo "ECC tools: Installed Perl Modules"
+	echo "* Info: Installing dnsenum Tool..."        
+	dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
         echo "ECC tools: Completed Snmpcheck Installation"
         cd $CDIR
 	rm -r -f /tmp/ECCTools
