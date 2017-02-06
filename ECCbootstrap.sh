@@ -62,7 +62,7 @@ install_ECC_Tools() {
 	echo "ECC tools: Installed Perl Modules"
 	echo "* Info: Installing dnsenum Tool..."        
 	dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
-        echo "ECC tools: Completed Snmpcheck Installation"
+        echo "ECC tools: Completed dnsenum Installation"
         cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
