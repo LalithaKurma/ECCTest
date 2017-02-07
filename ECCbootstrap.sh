@@ -99,7 +99,7 @@ install_fierce_perl_modules(){
 install_fierce(){
 	CDDR=$(pwd)
 	mkdir /tmp/fierce
-	cp fierce2 /tmp/fierce/
+	cp -r fierce2 /tmp/fierce/
 	cd /tmp/fierce/fierce2
 	perl Makefile.PL
 	make
