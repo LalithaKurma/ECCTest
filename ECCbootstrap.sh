@@ -123,6 +123,7 @@ libreadline5
 libsqlite3-dev
 libpcap-dev
 git-core
+gnupg2
 autoconf
 postgresql
 pgadmin3
