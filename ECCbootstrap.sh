@@ -116,8 +116,8 @@ install_ECC_Tools() {
 	CDIR=$(pwd)
 	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
 	cd /tmp/ECCTools
-	echo "Updating Ubuntu Repositories.."	
-	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
+	#echo "Updating Ubuntu Repositories.."	
+	#apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
         #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb
 	printf "\n"
