@@ -114,7 +114,7 @@ install_fierce(){
 install_metasploit_dependencies(){
 packages="build-essential
 bundler
-oracle-java8-installer
+openjdk-6-jdk
 libreadline-dev
 libssl-dev
 libpq5
