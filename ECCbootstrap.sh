@@ -4,6 +4,7 @@ __apt_get_install_noinput() {
 install_recon_ng(){
    packages="python-pip
 git
+python
 python-pip
 python-dnspython
 python-mechanize
