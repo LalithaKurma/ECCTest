@@ -122,7 +122,8 @@ libpq-dev
 libreadline5
 libsqlite3-dev
 libpcap-dev
-git-core autoconf
+git-core
+autoconf
 postgresql
 pgadmin3
 curl
@@ -160,9 +161,9 @@ install_metasploit(){
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
+	rvm --install .ruby-version
 	gem install bundler
 	gem install pg -v 0.19.0
-	rvm --install .ruby-version
 	bundle install
 	cd $CDDR
 }
