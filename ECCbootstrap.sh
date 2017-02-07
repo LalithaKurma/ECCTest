@@ -111,6 +111,61 @@ install_fierce(){
 	cp -R tt ~/.fierce2/
 	cd $CDDR
 }
+install_metasploit_dependencies(){
+packages="build-essential
+bundler
+oracle-java8-installer
+libreadline-dev
+libssl-dev
+libpq5
+libpq-dev
+libreadline5
+libsqlite3-dev
+libpcap-dev
+git-core autoconf
+postgresql
+pgadmin3
+curl
+zlib1g-dev
+libxml2-dev
+libxslt1-dev
+vncviewer
+libyaml-dev
+curl
+zlib1g-dev"
+	echo "Adding the Oracle Java Package Source Repository"
+	add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
+	echo "Updating Repository Package List ..."
+    	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
+
+   echo "Installing Metasploit dependency packages"
+   for PACKAGE in $packages; do
+        __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
+        ERROR=$?
+        if [ $ERROR -ne 0 ]; then
+            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
+        else
+            echo "Installed Package: $PACKAGE"
+        fi
+    done
+}
+install_metasploit(){
+	CDDR=$(pwd)
+	cd /tmp
+	echo "Installing and Configuring RVM"
+	gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+	\curl -sSL https://get.rvm.io | bash -s stable --ruby
+	source /usr/local/rvm/scripts/rvm
+	gem install bundler
+	echo "Downloading and Installing Metasploit Framework..."
+	git clone https://github.com/rapid7/metasploit-framework.git
+	cd metasploit-framework/
+	gem install bundler
+	gem install pg -v 0.19.0
+	rvm --install .ruby-version
+	bundle install
+	cd $CDDR
+}
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
   echo "ECC tools: Copying ECC Tools"
@@ -126,10 +181,10 @@ install_ECC_Tools() {
 	#dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
 	#echo "ECC tools: Completed NetDiscover Tool Installation"
 	#printf "\n"
-	#echo "* Info: Installing Nmap Tool..."        
-	#dpkg -i nmap_7.40-2_amd64.deb && apt install -f
-        #echo "ECC tools: Completed Nmap Tool Installation"
-	#printf "\n"
+	echo "* Info: Installing Nmap Tool..."        
+	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
+        echo "ECC tools: Completed Nmap Tool Installation"
+	printf "\n"
 	#echo "* Info: Installing Zenmap Tool..."        
 	#dpkg -i zenmap_7.40-2_all.deb && apt install -f
         #echo "ECC tools: Completed Zenmap Tool Installation"
@@ -156,13 +211,16 @@ install_ECC_Tools() {
 	#install_dnsdict6_dependencies
 	#install_dnsdict6
 	#echo "ECC tools: Completed dnsdict6 Installation"
-	echo "ECC tools: Installing fierce Perl Modules"
-	install_fierce_perl_modules
-	echo "ECC tools: Installed fierce Perl Modules"
-	printf "\n"
-	echo "* Info: Installing fierce Tool..."        
-	install_fierce
-        echo "ECC tools: Completed fierce Installation"
+	#echo "ECC tools: Installing fierce Perl Modules"
+	#install_fierce_perl_modules
+	#echo "ECC tools: Installed fierce Perl Modules"
+	#printf "\n"
+	#echo "* Info: Installing fierce Tool..."        
+	#install_fierce
+        #echo "ECC tools: Completed fierce Installation"
+	install_metasploit_dependencies
+	install_metasploit
+	echo "ECC tools: Completed Metasploit Framework Installation"
 	printf "\n"
         cd $CDIR
 	rm -r -f /tmp/ECCTools
