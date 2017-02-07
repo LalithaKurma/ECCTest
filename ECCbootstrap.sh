@@ -45,7 +45,9 @@ perl"
 
 install_dnsdict6_dependencies(){
 packages="libpcap0.8-dev 
-libssl-dev"
+libssl1.0.0
+libssl-dev
+openssl"
    echo "Installing dnsdict6 dependency packages"
    for PACKAGE in $packages; do
         __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
@@ -88,6 +90,8 @@ install_ECC_Tools() {
 	CDIR=$(pwd)
 	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
 	cd /tmp/ECCTools
+	echo "Updating Ubuntu Repositories.."	
+	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
         #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb
 	printf "\n"
