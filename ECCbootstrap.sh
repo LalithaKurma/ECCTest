@@ -84,6 +84,32 @@ install_dnsdict6(){
 	make install
 	cd $CDDR
 }
+install_fierce_perl_modules(){
+	perl -MCPAN -e "install Net::CIDR"
+	perl -MCPAN -e "install Net::Whois::ARIN"
+	perl -MCPAN -e "install Object::InsideOut"
+	perl -MCPAN -e "install Template"
+	perl -MCPAN -e "install Test::Class"
+	perl -MCPAN -e "install Test::MockObject"
+	perl -MCPAN -e "install Net::DNS"
+	perl -MCPAN -e "install Net::hostent"
+	perl -MCPAN -e "install WWW::Mechanize"
+
+}
+install_fierce(){
+	CDDR=$(pwd)
+	mkdir /tmp/fierce
+	cp fierce2 /tmp/fierce/
+	cd /tmp/fierce/fierce2
+	perl Makefile.PL
+	make
+	make test
+	make install
+	mkdir -p /pentest/enumeration/fierce/
+	ln -s /usr/local/bin/fierce /pentest/enumeration/fierce/fierce
+	cp -R tt ~/.fierce2/
+	cd $CDDR
+}
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
   echo "ECC tools: Copying ECC Tools"
@@ -124,11 +150,19 @@ install_ECC_Tools() {
 	#echo "* Info: Installing dnsenum Tool..."        
 	#dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
         #echo "ECC tools: Completed dnsenum Installation"
+	#printf "\n"
+	#echo "* Info: Installing dnsdict6 Tool..."
+	#install_dnsdict6_dependencies
+	#install_dnsdict6
+	#echo "ECC tools: Completed dnsdict6 Installation"
+	echo "ECC tools: Installing fierce Perl Modules"
+	install_fierce_perl_modules
+	echo "ECC tools: Installed fierce Perl Modules"
 	printf "\n"
-	echo "* Info: Installing dnsdict6 Tool..."
-	install_dnsdict6_dependencies
-	install_dnsdict6
-	echo "ECC tools: Completed dnsdict6 Installation"
+	echo "* Info: Installing fierce Tool..."        
+	install_fierce
+        echo "ECC tools: Completed fierce Installation"
+	printf "\n"
         cd $CDIR
 	rm -r -f /tmp/ECCTools
 }
