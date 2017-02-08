@@ -237,6 +237,7 @@ install_ECC_Tools() {
         #echo "ECC tools: Completed fierce Installation"
 	install_metasploit_dependencies
 	install_metasploit
+	install_metasploit
 	echo "ECC tools: Completed Metasploit Framework Installation"
 	printf "\n"
         cd $CDIR
