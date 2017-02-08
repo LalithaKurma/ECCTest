@@ -178,8 +178,8 @@ install_metasploit(){
 	#rvm --install '.ruby-version'
 	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
-	gem install pg -v 0.19.0
-	gem install multi_test -v 0.1.2	
+	#gem install pg -v 0.19.0
+	#gem install multi_test -v 0.1.2	
 	bundle install
 	cd $CDDR
 }
