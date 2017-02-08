@@ -114,7 +114,6 @@ install_fierce(){
 install_metasploit_dependencies(){
 packages="build-essential
 bundler
-openjdk-6-jdk
 libreadline-dev
 libssl-dev
 libpq5
@@ -132,9 +131,7 @@ zlib1g-dev
 libxml2-dev
 libxslt1-dev
 vncviewer
-libyaml-dev
-curl
-zlib1g-dev"
+libyaml-dev"
 	echo "Adding the Oracle Java Package Source Repository"
 	add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
 	echo "Updating Repository Package List ..."
@@ -150,6 +147,7 @@ zlib1g-dev"
             echo "Installed Package: $PACKAGE"
         fi
     done
+	apt-get -y install oracle-java8-installer
 }
 install_metasploit(){
 	CDDR=$(pwd)
