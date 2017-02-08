@@ -112,7 +112,8 @@ install_fierce(){
 	cd $CDDR
 }
 install_metasploit_dependencies(){
-packages="build-essential
+packages="openjdk-6-jdk
+build-essential
 bundler
 libreadline-dev
 libssl-dev
@@ -132,7 +133,8 @@ libxml2-dev
 libxslt1-dev
 vncviewer
 libyaml-dev
-openjdk-8-jdk"
+curl
+zlib1g-dev"
 #oracle-java8-installer"
 	echo "Adding the Oracle Java Package Source Repository"
 	add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
@@ -168,6 +170,7 @@ install_metasploit(){
 	rvm --install '.ruby-version'
 	gem install bundler
 	gem install pg -v 0.19.0
+	gem install multi_test -v 0.1.2	
 	bundle install
 	cd $CDDR
 }
