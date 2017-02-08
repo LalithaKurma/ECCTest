@@ -165,7 +165,7 @@ install_metasploit(){
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
-	rvm --install .ruby-version
+	rvm --install '.ruby-version'
 	gem install bundler
 	gem install pg -v 0.19.0
 	bundle install
