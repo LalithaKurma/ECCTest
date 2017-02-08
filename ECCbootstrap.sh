@@ -161,14 +161,22 @@ install_metasploit(){
 	CDDR=$(pwd)
 	cd /home/cast/
 	echo "Installing and Configuring RVM"
-	gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-	\curl -sSL https://get.rvm.io | bash -s stable --ruby
+	#gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+	#\curl -sSL https://get.rvm.io | bash -s stable --ruby
+	curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+	curl -L https://get.rvm.io | bash -s stable
 	source /usr/local/rvm/scripts/rvm
+	echo "source /usr/local/rvm/scripts/rvm" >> ~/.bashrc
+	source ~/.bashrc
+	RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
+	rvm install $RUBYVERSION
+	rvm use $RUBYVERSION --default
 	gem install bundler
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
-	rvm --install '.ruby-version'
+	#rvm --install '.ruby-version'
+	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
 	gem install pg -v 0.19.0
 	gem install multi_test -v 0.1.2	
