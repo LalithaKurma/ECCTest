@@ -131,7 +131,8 @@ zlib1g-dev
 libxml2-dev
 libxslt1-dev
 vncviewer
-libyaml-dev"
+libyaml-dev
+oracle-java8-installer"
 	echo "Adding the Oracle Java Package Source Repository"
 	add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
 	echo "Updating Repository Package List ..."
@@ -147,7 +148,10 @@ libyaml-dev"
             echo "Installed Package: $PACKAGE"
         fi
     done
-	apt-get -y install oracle-java8-installer
+	#apt-get -y install oracle-java8-installer
+	
+	echo "Updating Repository Package List ..."
+    	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 }
 install_metasploit(){
 	CDDR=$(pwd)
