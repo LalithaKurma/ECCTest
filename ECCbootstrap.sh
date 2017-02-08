@@ -154,12 +154,12 @@ nmap"
     done
 	#apt-get -y install oracle-java8-installer
 	
-	#echo "Updating Repository Package List ..."
-    	#apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
+	echo "Updating Repository Package List ..."
+    	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 }
 install_metasploit(){
 	CDDR=$(pwd)
-	cd /tmp
+	cd /home/cast/
 	echo "Installing and Configuring RVM"
 	gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 	\curl -sSL https://get.rvm.io | bash -s stable --ruby
