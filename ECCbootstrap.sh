@@ -134,7 +134,8 @@ libxslt1-dev
 vncviewer
 libyaml-dev
 curl
-zlib1g-dev"
+zlib1g-dev
+nmap"
 #oracle-java8-installer"
 	echo "Adding the Oracle Java Package Source Repository"
 	add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
@@ -153,8 +154,8 @@ zlib1g-dev"
     done
 	#apt-get -y install oracle-java8-installer
 	
-	echo "Updating Repository Package List ..."
-    	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
+	#echo "Updating Repository Package List ..."
+    	#apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 }
 install_metasploit(){
 	CDDR=$(pwd)
@@ -189,10 +190,10 @@ install_ECC_Tools() {
 	#dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
 	#echo "ECC tools: Completed NetDiscover Tool Installation"
 	#printf "\n"
-	echo "* Info: Installing Nmap Tool..."        
-	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
-        echo "ECC tools: Completed Nmap Tool Installation"
-	printf "\n"
+	#echo "* Info: Installing Nmap Tool..."        
+	#dpkg -i nmap_7.40-2_amd64.deb && apt install -f
+        #echo "ECC tools: Completed Nmap Tool Installation"
+	#printf "\n"
 	#echo "* Info: Installing Zenmap Tool..."        
 	#dpkg -i zenmap_7.40-2_all.deb && apt install -f
         #echo "ECC tools: Completed Zenmap Tool Installation"
