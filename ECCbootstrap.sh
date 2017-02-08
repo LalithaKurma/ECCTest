@@ -185,10 +185,10 @@ install_metasploit(){
 }
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
-  echo "ECC tools: Copying ECC Tools"
-	CDIR=$(pwd)
-	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
-	cd /tmp/ECCTools
+  #echo "ECC tools: Copying ECC Tools"
+	#CDIR=$(pwd)
+	#git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
+	#cd /tmp/ECCTools
 	#echo "Updating Ubuntu Repositories.."	
 	#apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
@@ -237,11 +237,10 @@ install_ECC_Tools() {
         #echo "ECC tools: Completed fierce Installation"
 	install_metasploit_dependencies
 	install_metasploit
-	install_metasploit
 	echo "ECC tools: Completed Metasploit Framework Installation"
 	printf "\n"
-        cd $CDIR
-	rm -r -f /tmp/ECCTools
+        #cd $CDIR
+	#rm -r -f /tmp/ECCTools
 }
 
 complete_message() {
