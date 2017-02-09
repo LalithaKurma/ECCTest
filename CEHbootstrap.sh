@@ -152,12 +152,6 @@ install_metasploit(){
 	cd $CDDR
 }
 install_ECC_Tools() {
-    echo "ECC tools: Copying ECC Tools"
-	CDIR=$(pwd)
-	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
-
-	cd /tmp/ECCTools
-
 	echo "Updating Ubuntu Repositories.."	
 	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1   
 		
@@ -168,7 +162,14 @@ install_ECC_Tools() {
 	install_perl_modules
 	echo "ECC tools: Installed Perl Modules"
 	printf "\n"
-	
+
+    echo "ECC tools: Copying ECC Tools"
+	CDIR=$(pwd)
+	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
+
+	cd /tmp/ECCTools
+
+		
 	echo "* Info: Installing Nmap Tool..."        
 	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
         echo "ECC tools: Completed Nmap Tool Installation"
