@@ -182,6 +182,7 @@ install_metasploit(){
 	#gem install pg -v 0.19.0
 	#gem install multi_test -v 0.1.2	
 	bundle install
+	bundle install
 	cd $CDDR
 }
 install_ECC_Tools() {
