@@ -160,8 +160,7 @@ install_ECC_Tools() {
 
 	echo "Updating Ubuntu Repositories.."	
 	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1   
-	
-	
+		
 	install_dependency_packages
 	printf "\n"
 
