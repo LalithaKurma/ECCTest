@@ -4,6 +4,10 @@ __apt_get_install_noinput() {
 install_dependency_packages(){
 packages="alien
 git
+hydra
+libdb5.1
+libnet1
+libnids1.21
 libpcap0.8-dev 
 libssl1.0.0
 libssl-dev
@@ -16,7 +20,8 @@ python-mechanize
 python-slowaes
 python-xlsxwriter
 python-jsonrpclib
-python-lxml"
+python-lxml
+sslstrip"
 	packages="$packages"
 echo "Installing Dependecy packages for ECC Tools"
    for PACKAGE in $packages; do
@@ -166,6 +171,21 @@ install_ECC_Tools() {
         echo "ECC tools: Completed Zenmap Tool Installation"
 	printf "\n"
 
+	echo "* Info: Installing hping3 Tool..."        
+	dpkg -i hping3_3.a2.ds2-7_amd64.deb && apt install -f
+        echo "ECC tools: Completed hping3 Tool Installation"
+	printf "\n"
+
+	echo "* Info: Installing Whois Tool..."        
+	dpkg -i whois_5.2.14_amd64.deb && apt install -f
+        echo "ECC tools: Completed Whois Tool Installation"	
+	printf "\n"
+	
+	echo "* Info: Installing dsniff Tool..." 
+	dpkg -i dsniff_2.4b1+debian-22_amd64.deb && apt install -f
+        echo "ECC tools: Completed dsniff Tool Installation"
+	printf"\n"
+	
 	echo "* Info: Installing recon-ng Tool..."
 	install_recon_ng
 	echo "ECC tools: Completed recon-ng Installation"
@@ -196,10 +216,16 @@ install_ECC_Tools() {
         echo "ECC tools: Completed fierce Installation"
 	printf "\n"
 
-	install_metasploit_dependencies
-	install_metasploit
-	echo "ECC tools: Completed Metasploit Framework Installation"
+	echo "* Info: Installing SE-Toolkit..."
+	install_setoolkit_dependencies        
+	install_setoolkit
+        echo "ECC tools: Completed SEToolkit Installation"
 	printf "\n"
+
+	#install_metasploit_dependencies
+	#install_metasploit
+	#echo "ECC tools: Completed Metasploit Framework Installation"
+	#printf "\n"
 
         cd $CDIR
 	rm -r -f /tmp/ECCTools
