@@ -151,6 +151,15 @@ install_metasploit(){
 	bundle install
 	cd $CDDR
 }
+install_setoolkit(){
+CDIR=$(pwd)
+cd /tmp
+git clone https://github.com/trustedsec/social-engineer-toolkit/ set/
+cd /tmp/set
+python setup.py install
+cd $CDIR
+rm -r -f /tmp/set
+}
 install_ECC_Tools() {
 	echo "Updating Ubuntu Repositories.."	
 	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1   
@@ -216,7 +225,6 @@ install_ECC_Tools() {
 	printf "\n"
 
 	echo "* Info: Installing SE-Toolkit..."
-	install_setoolkit_dependencies        
 	install_setoolkit
         echo "ECC tools: Completed SEToolkit Installation"
 	printf "\n"
