@@ -21,7 +21,8 @@ python-slowaes
 python-xlsxwriter
 python-jsonrpclib
 python-lxml
-sslstrip"
+sslstrip
+wireshark"
 	packages="$packages"
 echo "Installing Dependecy packages for ECC Tools"
    for PACKAGE in $packages; do
@@ -118,7 +119,7 @@ zlib1g-dev"
 	echo "Updating Repository Package List ..."
     	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 
-   echo "Installing Metasploit dependency packages"
+   echo "Installing Metasploit deprintf "\n"pendency packages"
    for PACKAGE in $packages; do
         __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
         ERROR=$?
@@ -161,6 +162,15 @@ install_ECC_Tools() {
 	echo "Updating Ubuntu Repositories.."	
 	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1   
 	
+	
+	install_dependency_packages
+	printf "\n"
+
+	echo "ECC tools: Installing Perl Modules"
+	install_perl_modules
+	echo "ECC tools: Installed Perl Modules"
+	printf "\n"
+	
 	echo "* Info: Installing Nmap Tool..."        
 	dpkg -i nmap_7.40-2_amd64.deb && apt install -f
         echo "ECC tools: Completed Nmap Tool Installation"
@@ -191,26 +201,16 @@ install_ECC_Tools() {
 	echo "ECC tools: Completed recon-ng Installation"
 	printf "\n"
 		
-	install_dnsenum_dependencies
-	echo "ECC tools: Installing Perl Modules"
-	install_perl_modules
-	echo "ECC tools: Installed Perl Modules"
-	printf "\n"
-	
+		
 	echo "* Info: Installing dnsenum Tool..."        
 	dpkg -i dnsenum_1.2.4.2-6_all.deb && apt install -f
         echo "ECC tools: Completed dnsenum Installation"
 	printf "\n"
 	
 	echo "* Info: Installing dnsdict6 Tool..."
-	install_dnsdict6_dependencies
 	install_dnsdict6
 	echo "ECC tools: Completed dnsdict6 Installation"
 	
-	echo "ECC tools: Installing fierce Perl Modules"
-	install_fierce_perl_modules
-	echo "ECC tools: Installed fierce Perl Modules"
-	printf "\n"
 	echo "* Info: Installing fierce Tool..."        
 	install_fierce
         echo "ECC tools: Completed fierce Installation"
