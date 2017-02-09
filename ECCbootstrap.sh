@@ -1,34 +1,34 @@
 __apt_get_install_noinput() {
     apt-get install -y -o DPkg::Options::=--force-confold $@; return $?
 }
-install_recon_ng(){
-   packages="python-pip
-git
-python
-python-pip
-python-dnspython
-python-mechanize
-python-slowaes
-python-xlsxwriter
-python-jsonrpclib
-python-lxml"
-   CDDR=$(pwd)
-   cd /tmp/ECCTools/reconng
-   packages="$packages"
-   echo "Installing Python packages"
-   for PACKAGE in $packages; do
-        __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
-        ERROR=$?
-        if [ $ERROR -ne 0 ]; then
-            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
-        else
-            echo "Installed Package: $PACKAGE"
-        fi
-    done
-    #pip install -r REQUIREMENTS 
-    cp -r /tmp/ECCTools/reconng /home/cast/
-    cd $CDDR
-}
+#install_recon_ng(){
+#   packages="python-pip
+#git
+#python
+#python-pip
+#python-dnspython
+#python-mechanize
+#python-slowaes
+#python-xlsxwriter
+#python-jsonrpclib
+#python-lxml"
+#   CDDR=$(pwd)
+#   cd /tmp/ECCTools/reconng
+#   packages="$packages"
+#   echo "Installing Python packages"
+#   for PACKAGE in $packages; do
+#        __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
+#        ERROR=$?
+#        if [ $ERROR -ne 0 ]; then
+#            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
+#        else
+#            echo "Installed Package: $PACKAGE"
+#        fi
+#    done
+#    #pip install -r REQUIREMENTS 
+#    cp -r /tmp/ECCTools/reconng /home/cast/
+#    cd $CDDR
+#}
 install_dnsenum_dependencies(){
 packages="alien
 perl"
