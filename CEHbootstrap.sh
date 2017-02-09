@@ -154,7 +154,6 @@ install_metasploit(){
 install_ECC_Tools() {
     echo "ECC tools: Copying ECC Tools"
 	CDIR=$(pwd)
-
 	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
 
 	cd /tmp/ECCTools
