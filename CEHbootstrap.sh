@@ -1,3 +1,20 @@
+install_desktop_background() {
+echo "Transforming Desktop Background"
+	CDIR=$(pwd)
+	cd /home/
+	#apt-get install git
+	git clone --recursive https://github.com/rinnimatthews/ECC-certis /home/ECC-certis >> $HOME/ECC-install.log 2>&1
+sudo chmod 777 /home/ECC-certis/
+sudo chmod 777 /home/ECC-certis/Images
+#sudo chmod 777 /home/ECC-certis/link_files
+#sudo chmod 777 /home/ECC-certis/link_files/CEH.sh
+#sudo chmod 777 /home/ECC-certis/link_files/CND.sh
+#sudo chmod 777 /home/ECC-certis/link_files/CHFI.sh
+cp -R /home/ECC-certis/Images/warty-final-ubuntu.png /usr/share/backgrounds/
+
+#rm -f /home/ECC-certis
+
+}
 __apt_get_install_noinput() {
     apt-get install -y -o DPkg::Options::=--force-confold $@; return $?
 }
@@ -279,6 +296,7 @@ complete_message() {
 #Calling to install ECC-Tools    
 echo "ECC: Welcome CEH"
 install_ECC_Tools
+install_desktop_background
 complete_message
 
 
