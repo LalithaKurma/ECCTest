@@ -181,8 +181,8 @@ install_metasploit(){
 	gem install bundler
 	gem install rubygems-bundler
 	gem regenerate_binstubs
-	#gem install pg -v 0.19.0
-	#gem install multi_test -v 0.1.2	
+	gem install pg -v 0.19.0
+	gem install multi_test -v 0.1.2	
 	bundle install
 	gem update bundler
 	bundle install
