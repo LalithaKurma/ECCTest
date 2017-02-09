@@ -3,6 +3,26 @@ __apt_get_install_noinput() {
 }
 install_dependency_packages(){
 packages="alien
+openjdk-6-jdk
+build-essential
+bundler
+libreadline-dev
+libpq5
+libpq-dev
+libreadline5
+libsqlite3-dev
+libpcap-dev
+git-core
+gnupg2
+autoconf
+postgresql
+pgadmin3
+curl
+zlib1g-dev
+libxml2-dev
+libxslt1-dev
+vncviewer
+libyaml-dev
 git
 hydra
 libdb5.1
@@ -34,6 +54,8 @@ echo "Installing Dependecy packages for ECC Tools"
             echo "Installed Package: $PACKAGE"
         fi
     done
+	echo "Updating Repository Package List ..."
+    	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 }
 install_recon_ng(){
    CDDR=$(pwd)
@@ -110,25 +132,23 @@ zlib1g-dev
 libxml2-dev
 libxslt1-dev
 vncviewer
-libyaml-dev
-curl
-zlib1g-dev"
+libyaml-dev"
 #oracle-java8-installer"
 	echo "Adding the Oracle Java Package Source Repository"
 	add-apt-repository -y ppa:webupd8team/java  >> $HOME/ECC-install.log 2>&1 || return 1
 	echo "Updating Repository Package List ..."
     	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 
-   echo "Installing Metasploit deprintf "\n"pendency packages"
-   for PACKAGE in $packages; do
-        __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
-        ERROR=$?
-        if [ $ERROR -ne 0 ]; then
-            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
-        else
-            echo "Installed Package: $PACKAGE"
-        fi
-    done
+   #echo "Installing Metasploit deprintf "\n"pendency packages"
+   #for PACKAGE in $packages; do
+    #    __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
+    #    ERROR=$?
+     #   if [ $ERROR -ne 0 ]; then
+     #       echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
+     #   else
+     #       echo "Installed Package: $PACKAGE"
+     #   fi
+    #done
 		
 	echo "Updating Repository Package List ..."
     	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
@@ -137,17 +157,30 @@ install_metasploit(){
 	CDDR=$(pwd)
 	cd /home/cast/
 	echo "Installing and Configuring RVM"
-	gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-	\curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+	#gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+	#\curl -sSL https://get.rvm.io | bash -s stable --ruby
+	curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+	curl -L https://get.rvm.io | bash -s stable
 	source /usr/local/rvm/scripts/rvm
+	echo "source /usr/local/rvm/scripts/rvm" >> ~/.bashrc
+	source ~/.bashrc
+	RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
+	rvm install $RUBYVERSION
+	rvm use $RUBYVERSION --default
 	gem install bundler
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
-	rvm --install '.ruby-version'
+	#rvm --install '.ruby-version'
+	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
+	gem install rubygems-bundler
+	gem regenerate_binstubs
 	gem install pg -v 0.19.0
 	gem install multi_test -v 0.1.2	
+	bundle install
+	gem update bundler
 	bundle install
 	cd $CDDR
 }
@@ -163,8 +196,9 @@ rm -r -f /tmp/set
 install_ECC_Tools() {
 	echo "Updating Ubuntu Repositories.."	
 	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1   
-		
+	install_metasploit_dependencies
 	install_dependency_packages
+	
 	printf "\n"
 
 	echo "ECC tools: Installing Perl Modules"
@@ -229,10 +263,9 @@ install_ECC_Tools() {
         echo "ECC tools: Completed SEToolkit Installation"
 	printf "\n"
 
-	#install_metasploit_dependencies
-	#install_metasploit
-	#echo "ECC tools: Completed Metasploit Framework Installation"
-	#printf "\n"
+	install_metasploit
+	echo "ECC tools: Completed Metasploit Framework Installation"
+	printf "\n"
 
         cd $CDIR
 	rm -r -f /tmp/ECCTools
