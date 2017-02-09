@@ -23,7 +23,7 @@ python-lxml"
             echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
         else
             echo "Installed Package: $PACKAGE"
-     gem install rubygems-bundler   fi
+        fi
     done
     #pip install -r REQUIREMENTS 
     cp -r /tmp/ECCTools/reconng /home/cast/
