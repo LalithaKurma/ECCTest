@@ -23,7 +23,7 @@ python-lxml"
             echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
         else
             echo "Installed Package: $PACKAGE"
-        fi
+     gem install rubygems-bundler   fi
     done
     #pip install -r REQUIREMENTS 
     cp -r /tmp/ECCTools/reconng /home/cast/
@@ -179,9 +179,12 @@ install_metasploit(){
 	#rvm --install '.ruby-version'
 	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
+	gem install rubygems-bundler
+	gem regenerate_binstubs
 	#gem install pg -v 0.19.0
 	#gem install multi_test -v 0.1.2	
 	bundle install
+	gem update bundler
 	bundle install
 	cd $CDDR
 }
