@@ -10,10 +10,15 @@ sudo chmod 777 /home/ECC-certis/Images
 #sudo chmod 777 /home/ECC-certis/link_files/CEH.sh
 #sudo chmod 777 /home/ECC-certis/link_files/CND.sh
 #sudo chmod 777 /home/ECC-certis/link_files/CHFI.sh
-cp -R /home/ECC-certis/Images/warty-final-ubuntu.png /usr/share/backgrounds/
+cp -R /home/ECC-certis/Images/CEH.png /usr/share/backgrounds/warty-final-ubuntu.png
 
 #rm -f /home/ECC-certis
 
+}
+customize_default_icons() {
+echo "Replacing default panel icons"
+sudo gsettings set com.canonical.Unity.Launcher favorites "['nautilus-home.desktop','application://firefox.desktop','application://gnome-terminal.desktop']"
+echo "default panel icons replaced"
 }
 __apt_get_install_noinput() {
     apt-get install -y -o DPkg::Options::=--force-confold $@; return $?
@@ -297,6 +302,7 @@ complete_message() {
 echo "ECC: Welcome CEH"
 install_ECC_Tools
 install_desktop_background
+customize_default_icons
 complete_message
 
 
