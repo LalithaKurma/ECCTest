@@ -34,6 +34,7 @@ libpq-dev
 libreadline5
 libsqlite3-dev
 libpcap-dev
+git
 git-core
 gnupg2
 autoconf
@@ -53,6 +54,7 @@ libnids1.21
 libpcap0.8-dev 
 libssl1.0.0
 libssl-dev
+libwww-mechanize-shell-perl
 openssl
 perl
 python-pip
@@ -215,6 +217,12 @@ python setup.py install
 cd $CDIR
 rm -r -f /tmp/set
 }
+install_slowloris(){
+	CDDR=$(pwd)
+	cd /home/cast/
+	git clone https://github.com/llaera/slowloris.pl
+	cd $CDDR
+}
 install_ECC_Tools() {
 	echo "Updating Ubuntu Repositories.."	
 	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1   
@@ -285,6 +293,11 @@ install_ECC_Tools() {
         echo "ECC tools: Completed SEToolkit Installation"
 	printf "\n"
 
+	echo "* Info: Installing slowloris.pl Tool..."
+	install_slowloris
+	echo "ECC tools: Completed slowloris.pl Installation"
+	printf "\n"	
+	
 	install_metasploit
 	echo "ECC tools: Completed Metasploit Framework Installation"
 	printf "\n"
