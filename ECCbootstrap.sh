@@ -180,12 +180,12 @@ install_metasploit(){
 	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
 	gem install rubygems-bundler
-	gem regenerate_binstubs
-	gem install pg -v 0.19.0
-	gem install multi_test -v 0.1.2	
-	bundle install
-	gem update bundler
-	bundle install
+	gem regenerate_binstubs | bundle install
+	#gem install pg -v 0.19.0
+	#gem install multi_test -v 0.1.2	
+	#bundle install
+	#gem update bundler
+	#bundle install
 	cd $CDDR
 }
 install_slowloris_dependencies(){
@@ -270,14 +270,14 @@ install_ECC_Tools() {
 	#echo "* Info: Installing fierce Tool..."        
 	#install_fierce
         #echo "ECC tools: Completed fierce Installation"
-	#install_metasploit_dependencies
-	#install_metasploit
-	#echo "ECC tools: Completed Metasploit Framework Installation"
+	install_metasploit_dependencies
+	install_metasploit
+	echo "ECC tools: Completed Metasploit Framework Installation"
 #	printf "\n"
-	install_slowloris_dependencies
-	echo "* Info: Installing slowloris.pl Tool..."
-	install_slowloris
-	echo "ECC tools: Completed slowloris.pl Installation"
+	#install_slowloris_dependencies
+	#echo "* Info: Installing slowloris.pl Tool..."
+	#install_slowloris
+	#echo "ECC tools: Completed slowloris.pl Installation"
 #	printf "\n"
 
  #       cd $CDIR
