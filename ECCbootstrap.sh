@@ -176,16 +176,16 @@ install_metasploit(){
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
-	#rvm --install '.ruby-version'
+	rvm --install '.ruby-version'
 	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
 	gem install rubygems-bundler
 	gem regenerate_binstubs | bundle install
-	#gem install pg -v 0.19.0
-	#gem install multi_test -v 0.1.2	
-	#bundle install
-	#gem update bundler
-	#bundle install
+	gem install pg -v 0.19.0
+	gem install multi_test -v 0.1.2	
+	bundle install
+	gem update bundler
+	bundle install
 	cd $CDDR
 }
 install_slowloris_dependencies(){
