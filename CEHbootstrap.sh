@@ -185,7 +185,7 @@ install_metasploit(){
 	#gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 	#\curl -sSL https://get.rvm.io | bash -s stable --ruby
 	curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
-	curl -L https://get.rvm.io | bash -s stable
+	curl -L hwget --quiet -O - https://raw.githubusercontent.com/LalithaKurma/ECCTest/master/CEHbootstrap.sh | sudo bash -s -- -i -s –yttps://get.rvm.io | bash -s stable
 	source /usr/local/rvm/scripts/rvm
 	echo "source /usr/local/rvm/scripts/rvm" >> ~/.bashrc
 	source ~/.bashrc
