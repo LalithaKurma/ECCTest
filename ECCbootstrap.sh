@@ -188,6 +188,30 @@ install_metasploit(){
 	bundle install
 	cd $CDDR
 }
+install_slowloris_dependencies(){
+packages="perl 
+libwww-mechanize-shell-perl"
+	echo "Updating Repository Package List ..."
+    	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
+
+   echo "Installing slowloris dependency packages"
+   for PACKAGE in $packages; do
+        __apt_get_install_noinput $PACKAGE >> $HOME/ECC-install.log 2>&1
+        ERROR=$?
+        if [ $ERROR -ne 0 ]; then
+            echo "Install Failure: $PACKAGE (Error Code: $ERROR)"
+        else
+            echo "Installed Package: $PACKAGE"
+        fi
+    done
+	perl -MCPAN -e "install WWW::Mechanize"
+}
+install_slowloris(){
+	CDDR=$(pwd)
+	cd /home/cast/
+	git clone https://github.com/llaera/slowloris.pl
+	cd $CDDR
+}
 install_ECC_Tools() {
   # Installing Burp suite from ECCTools Github Repository
   #echo "ECC tools: Copying ECC Tools"
@@ -245,9 +269,14 @@ install_ECC_Tools() {
 	#echo "* Info: Installing fierce Tool..."        
 	#install_fierce
         #echo "ECC tools: Completed fierce Installation"
-	install_metasploit_dependencies
-	install_metasploit
-	echo "ECC tools: Completed Metasploit Framework Installation"
+	#install_metasploit_dependencies
+	#install_metasploit
+	#echo "ECC tools: Completed Metasploit Framework Installation"
+#	printf "\n"
+	install_slowloris_dependencies
+	echo "* Info: Installing slowloris.pl Tool..."
+	install_slowloris
+	echo "ECC tools: Completed slowloris.pl Installation"
 #	printf "\n"
 
  #       cd $CDIR
