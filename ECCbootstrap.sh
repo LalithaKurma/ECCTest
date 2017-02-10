@@ -189,7 +189,8 @@ install_metasploit(){
 	cd $CDDR
 }
 install_slowloris_dependencies(){
-packages="perl 
+packages="git
+perl 
 libwww-mechanize-shell-perl"
 	echo "Updating Repository Package List ..."
     	apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
