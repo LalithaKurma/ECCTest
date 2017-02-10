@@ -173,6 +173,13 @@ install_metasploit(){
 	rvm install $RUBYVERSION
 	rvm use $RUBYVERSION --default
 	gem install bundler
+	echo "Configuring Postgresql..."
+	sudo -s
+	su postgres
+	echo "* enter msf as password"
+	createuser msf -P -S -R -D
+	createdb -O msf msf
+	exit
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
@@ -181,11 +188,15 @@ install_metasploit(){
 	gem install bundler
 	gem install rubygems-bundler
 	gem regenerate_binstubs | bundle install
-	gem install pg -v 0.19.0
-	gem install multi_test -v 0.1.2	
-	bundle install
-	gem update bundler
-	bundle install
+	cp ~/metasploit-framework/config/database.yml.example ~/metasploit-framework/config/database.yml
+        cp /home/cast/ECCTools/database.yml ~/metasploit-framework/config/database.yml
+	sudo sh -c "echo export MSF_DATABASE_CONFIG=/home/cast/metasploit-framework/config/database.yml >> /etc/profile"
+	source /etc/profile
+	#gem install pg -v 0.19.0
+	#gem install multi_test -v 0.1.2	
+	#bundle install
+	#gem update bundler
+	#bundle install
 	cd $CDDR
 }
 install_slowloris_dependencies(){
