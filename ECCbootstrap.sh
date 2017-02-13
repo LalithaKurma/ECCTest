@@ -196,8 +196,9 @@ install_metasploit(){
 	cd metasploit-framework/
 	#rvm --install '.ruby-version'
 	rvm --default use ruby-${RUByVERSION}@metasploit-framework
+	rvm gemset create metasploit-framework
 	gem install bundler
-	#bundle install
+	bundle install
 	gem install rubygems-bundler
 	gem regenerate_binstubs | bundle install
 	echo "Configuring Metasploit Framework.."
