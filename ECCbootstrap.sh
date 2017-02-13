@@ -173,7 +173,8 @@ install_metasploit(){
 	RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
 	rvm install $RUBYVERSION
 	rvm use $RUBYVERSION --default
-	gem install bundler
+	rvm install ruby-2.4.0
+	#gem install bundler
 	echo "Configuring Postgresql..."
 	#sudo -s
 	#su postgres
@@ -236,12 +237,12 @@ install_slowloris(){
 	cd $CDDR
 }
 install_ECC_Tools() {
-  # Installing Burp suite from ECCTools Github Repository
-  #echo "ECC tools: Copying ECC Tools"
+  
+  echo "ECC tools: Copying ECC Tools"
 
 	CDIR=$(pwd)
-#	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
-#	cd /tmp/ECCTools
+	git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
+	cd /tmp/ECCTools
 
 	#CDIR=$(pwd)
 	#git clone --recursive https://github.com/LalithaKurma/ECCTools /tmp/ECCTools >> $HOME/ECC-install.log 2>&1
@@ -250,7 +251,7 @@ install_ECC_Tools() {
 	#apt-get update >> $HOME/ECC-install.log 2>&1 || return 1
 	#bash burpsuite_free_linux_v1_7_16.sh >> $HOME/ECC-install.log 2>&1
         #gdebi netdiscover_0.3beta7~pre+svn118-1_amd64.deb
-	printf "\n"
+	#printf "\n"
 	#echo "* Info: Installing NetDiscover Tool..."        
 	#dpkg -i netdiscover_0.3beta7~pre+svn118-1_amd64.deb && apt install -f
 	#echo "ECC tools: Completed NetDiscover Tool Installation"
@@ -305,8 +306,8 @@ install_ECC_Tools() {
  #       cd $CDIR
 #	rm -r -f /tmp/ECCTools
 
-        #cd $CDIR
-	#rm -r -f /tmp/ECCTools
+        cd $CDIR
+	rm -r -f /tmp/ECCTools
 
 }
 
