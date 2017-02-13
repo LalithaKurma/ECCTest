@@ -170,12 +170,12 @@ install_metasploit(){
 	source /usr/local/rvm/scripts/rvm
 	echo "source /usr/local/rvm/scripts/rvm" >> ~/.bashrc
 	source ~/.bashrc
-	#RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
-	#rvm install $RUBYVERSION	
+	RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
+	rvm install $RUBYVERSION	
+	rvm use $RUBYVERSION --default
 	rvm install ruby-2.4.0
-	#rvm use $RUBYVERSION --default
-	rvm use 2.4.0 --default
-	#gem install bundler
+	#rvm use 2.4.0 --default
+	gem install bundler
 	echo "Configuring Postgresql..."
 	#sudo -s
 	#su postgres
@@ -195,11 +195,11 @@ install_metasploit(){
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
 	#rvm --install '.ruby-version'
-	#rvm --default use ruby-${RUByVERSION}@metasploit-framework
+	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
-	bundle install
-	#gem install rubygems-bundler
-	#gem regenerate_binstubs | bundle install
+	#bundle install
+	gem install rubygems-bundler
+	gem regenerate_binstubs | bundle install
 	echo "Configuring Metasploit Framework.."
 	cp ~/metasploit-framework/config/database.yml.example ~/metasploit-framework/config/database.yml
         cp /tmp/ECCTools/database.yml ~/metasploit-framework/config/database.yml
