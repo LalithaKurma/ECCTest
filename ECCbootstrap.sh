@@ -176,18 +176,23 @@ install_metasploit(){
 	echo "Configuring Postgresql..."
 	sudo -s
 	su postgres
-	echo "* enter msf as password"
-	createuser msf -P -S -R -D
+	psql
+	CREATE USER msf WITH PASSWORD 'msf' CREATEDB;
 	createdb -O msf msf
+	\q
 	exit
+	#createuser msf -P -S -R -D
+	#createdb -O msf msf
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
 	rvm --install '.ruby-version'
 	rvm --default use ruby-${RUByVERSION}@metasploit-framework
 	gem install bundler
-	gem install rubygems-bundler
-	gem regenerate_binstubs | bundle install
+	bundle install
+	#gem install rubygems-bundler
+	#gem regenerate_binstubs | bundle install
+	echo "Configuring Metasploit Framework.."
 	cp ~/metasploit-framework/config/database.yml.example ~/metasploit-framework/config/database.yml
         cp /home/cast/ECCTools/database.yml ~/metasploit-framework/config/database.yml
 	sudo sh -c "echo export MSF_DATABASE_CONFIG=/home/cast/metasploit-framework/config/database.yml >> /etc/profile"
