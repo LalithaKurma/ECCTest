@@ -126,6 +126,7 @@ git-core
 gnupg2
 autoconf
 postgresql
+postgresql-contrib
 pgadmin3
 curl
 zlib1g-dev
@@ -174,15 +175,20 @@ install_metasploit(){
 	rvm use $RUBYVERSION --default
 	gem install bundler
 	echo "Configuring Postgresql..."
-	sudo -s
-	su postgres
-	psql
-	CREATE USER msf WITH PASSWORD 'msf' CREATEDB;
-	createdb -O msf msf
-	\q
-	exit
+	#sudo -s
+	#su postgres
+	#apt-get isntall postgresql postgresql-contrib
+	#sudo -u postgres psql postgres
+	#psql
+	#CREATE USER msf WITH PASSWORD 'msf' CREATEDB;
+	#createdb -O msf msf
+	#\q
+	#exit
 	#createuser msf -P -S -R -D
 	#createdb -O msf msf
+	
+	sudo -u postgres psql -c "CREATE USER msf WITH PASSWORD 'msf' CREATEDB;"
+	sudo -u postgres createdb -O msf msf
 	echo "Downloading and Installing Metasploit Framework..."
 	git clone https://github.com/rapid7/metasploit-framework.git
 	cd metasploit-framework/
