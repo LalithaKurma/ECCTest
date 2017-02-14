@@ -173,7 +173,7 @@ install_metasploit(){
 	RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
 	rvm install $RUBYVERSION	
 	rvm use $RUBYVERSION --default
-	rvm install ruby-2.1.0
+	rvm install ruby-2.4.0
 	gem install bundler
 	echo "Configuring Postgresql..."
 	#sudo -s
